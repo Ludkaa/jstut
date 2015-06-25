@@ -54,7 +54,12 @@ function mix (s1, s2)
 var s1 = 'ABCDEFGHIJK';
 var s2 = 'LMN';
 console.log('mix(): ' + s1  + ' + ' +  s2 + ' -> ' + mix(s1, s2))
-
+/**
+ * Funkcia rot13 zašifruje vstup podľa rot13.
+ *
+ * @param {string} x slovo na zašifrovanie
+ * @return {string}
+ */
 function rot13 (x)
 {
 	var hodnota;
