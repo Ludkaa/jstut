@@ -52,28 +52,55 @@ function nahodneCislo (min,max)
  * Generuje náhodné pole s viacerými úrovňami.
  * @return {array}
  */
-function vygenerujPole()
+function vygenerujPole(c)
 {
-	var pole = []
-	var c = 0
-	var cislo = 0
+	var pole = [];
+	var cislo = 0;
 	for(var i = 0; i < 10; i++)
 	{
 		cislo = nahodneCislo(1,2);
-		if(cislo===1)
+		if(cislo === 1)
 		{
-			pole.push(nahodneCislo(1,100))
+			pole.push(nahodneCislo(1,100));
 		}
 		else
 		{
 			if(c < 5)
 			{
-				c = c + 1
-				pole.push(vygenerujPole())
+				c = c + 1;
+				pole.push(vygenerujPole(c));
 			}
 		}		
 	}
-	return pole
+	return pole;
 }
 
-console.log(vygenerujPole())
+console.log(vygenerujPole(0))
+
+function vykresliPole(x, c)
+{
+	var p;
+	var m;
+	for(var i = 0; i < x.length; i++)
+	{
+		if (Array.isArray(x[i]) === false )
+		{
+			process.stdout.write(x[i] + ',');
+		}
+		if (Array.isArray(x[i]) === true )
+		{
+			c = c + 1;
+			p = c * 4 ;
+			m = ' ';
+			for(var j = 0; j < p; j++)
+			{
+				m = m + m;
+			}
+			console.log('\n',  '[    ')
+			vykresliPole (x[i], c);
+			console.log('\n]')
+		}
+	}
+}
+console.log(vykresliPole(vygenerujPole(0), 0))
+
