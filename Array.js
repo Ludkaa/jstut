@@ -50,6 +50,7 @@ function nahodneCislo (min,max)
  * Generuje náhodné pole.
  * 
  * Generuje náhodné pole s viacerými úrovňami.
+ * @param {int} c počiatočná úroveň
  * @return {array}
  */
 function vygenerujPole(c)
@@ -65,7 +66,7 @@ function vygenerujPole(c)
 		}
 		else
 		{
-			if(c < 5)
+			if(c <= 5)
 			{
 				c = c + 1;
 				pole.push(vygenerujPole(c));
@@ -74,33 +75,45 @@ function vygenerujPole(c)
 	}
 	return pole;
 }
+var vPole = vygenerujPole(0) 
+console.log(vPole)
+console.log('//////////////////////////////////////////////////////////////////////')
 
-console.log(vygenerujPole(0))
-
+/**
+ * Vykresľuje zadané pole.
+ * 
+ * @param {array} x pole na vykreslenie
+ * @param {int} c počiatočná úroveň
+ * @return {string}
+ */
 function vykresliPole(x, c)
 {
+	var m
+	var medzera
 	var p;
-	var m;
+	var k;
 	for(var i = 0; i < x.length; i++)
 	{
+		if (Array.isArray(x[i]) === true )
+		{
+			m = ''
+			p = c * 4 
+			k = 'm';
+			for(var j = 0; j < p; j++)
+			{
+				m = m + k;
+			}
+			console.log('\n', m, '[ ')
+			c = c + 1;
+			vykresliPole (x[i], c)
+			console.log('\n',']')
+		}
 		if (Array.isArray(x[i]) === false )
 		{
 			process.stdout.write(x[i] + ',');
 		}
-		if (Array.isArray(x[i]) === true )
-		{
-			c = c + 1;
-			p = c * 4 ;
-			m = ' ';
-			for(var j = 0; j < p; j++)
-			{
-				m = m + m;
-			}
-			console.log('\n',  '[    ')
-			vykresliPole (x[i], c);
-			console.log('\n]')
-		}
 	}
 }
-console.log(vykresliPole(vygenerujPole(0), 0))
-
+console.log('[')
+vykresliPole(vPole, 1);
+console.log(']')
