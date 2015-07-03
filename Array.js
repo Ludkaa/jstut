@@ -9,7 +9,7 @@ var data = [
 	],
 	13,14,15
 ]
-
+console.log(data)
 /**
  * Funkcia recursion má za úlohu, vypísať obsah vstupu.
  * 
@@ -66,7 +66,7 @@ function vygenerujPole(c)
 		}
 		else
 		{
-			if(c <= 5)
+			if(c <= 2)
 			{
 				c = c + 1;
 				pole.push(vygenerujPole(c));
@@ -76,7 +76,7 @@ function vygenerujPole(c)
 	return pole;
 }
 var vPole = vygenerujPole(0) 
-console.log(vPole)
+//console.log(vPole)
 console.log('//////////////////////////////////////////////////////////////////////')
 
 /**
@@ -88,32 +88,55 @@ console.log('///////////////////////////////////////////////////////////////////
  */
 function vykresliPole(x, c)
 {
-	var m
-	var medzera
+	var n = 1;
+	var pocetm;
 	var p;
 	var k;
+	var nn;
+	var pocetmm;
+	var pp;
+	var kk;
 	for(var i = 0; i < x.length; i++)
 	{
 		if (Array.isArray(x[i]) === true )
 		{
-			m = ''
-			p = c * 4 
-			k = 'm';
+			pocetm = ''
+			p = c * 4 ;
+			k = ' ';
 			for(var j = 0; j < p; j++)
 			{
-				m = m + k;
+				pocetm = pocetm + k;
 			}
-			console.log('\n', m, '[ ')
+			console.log('\n', pocetm, '[')
 			c = c + 1;
-			vykresliPole (x[i], c)
-			console.log('\n',']')
+			vykresliPole (x[i], c, n);
+			console.log('\n', pocetm, ']')
 		}
-		if (Array.isArray(x[i]) === false )
+		else
 		{
-			process.stdout.write(x[i] + ',');
+			pocetmm = '';
+			pp = c * 4 + 4 ;
+			kk = ' ';
+			for(var l = 0; l < pp; l++)
+			{
+				pocetmm = pocetmm + kk;
+			}
+			if(n === 1)
+			{
+				var b = x[i] + ''
+				process.stdout.write(pocetmm)
+				process.stdout.write(b)
+				process.stdout.write(',')
+			}
+			else
+			{
+				process.stdout.write(x[i] + ',');
+			}
+			n = n + 1;
+			//console.log(n, 'nn')
 		}
 	}
 }
 console.log('[')
-vykresliPole(vPole, 1);
+vykresliPole(data, 1);
 console.log(']')
